@@ -1,0 +1,11 @@
+# DataVault Financial Services - Nuclia Integration Requirements
+# As implemented in Article 2
+
+# Nuclia SDK (using latest stable version)
+nuclia==4.9.8          # Nuclia Python SDK for RAG-as-a-Service
+
+# Core dependencies
+python-dotenv==1.1.1    # Environment variable management
+pytest==8.4.1          # Testing framework
+pytest-cov==4.1.0      # Test coverage reporting
+schedule==1.2.0        # Task scheduling for automation

@@ -1,0 +1,101 @@
+{
+  "report_date": "2024-10-15",
+  "report_type": "quarterly_portfolio_review",
+  "client_segments": [
+    {
+      "segment": "high_net_worth",
+      "aum": 4500000000,
+      "client_count": 382,
+      "average_portfolio_size": 11780104,
+      "performance": {
+        "ytd_return": 0.087,
+        "q3_return": 0.023,
+        "volatility": 0.142,
+        "sharpe_ratio": 1.23
+      },
+      "allocations": {
+        "equities": 0.65,
+        "fixed_income": 0.25,
+        "alternatives": 0.08,
+        "cash": 0.02
+      },
+      "top_concerns": [
+        "inflation impact",
+        "market volatility",
+        "tax implications"
+      ]
+    },
+    {
+      "segment": "institutional",
+      "aum": 8200000000,
+      "client_count": 47,
+      "average_portfolio_size": 174468085,
+      "performance": {
+        "ytd_return": 0.076,
+        "q3_return": 0.019,
+        "volatility": 0.098,
+        "sharpe_ratio": 1.45
+      },
+      "allocations": {
+        "equities": 0.52,
+        "fixed_income": 0.38,
+        "alternatives": 0.07,
+        "cash": 0.03
+      },
+      "top_concerns": [
+        "regulatory compliance",
+        "liquidity management",
+        "benchmark tracking"
+      ]
+    },
+    {
+      "segment": "retirement_accounts",
+      "aum": 2300000000,
+      "client_count": 5824,
+      "average_portfolio_size": 395007,
+      "performance": {
+        "ytd_return": 0.068,
+        "q3_return": 0.018,
+        "volatility": 0.086,
+        "sharpe_ratio": 1.67
+      },
+      "allocations": {
+        "equities": 0.45,
+        "fixed_income": 0.45,
+        "alternatives": 0.03,
+        "cash": 0.07
+      },
+      "top_concerns": [
+        "retirement income",
+        "longevity risk",
+        "healthcare costs"
+      ]
+    }
+  ],
+  "market_outlook": {
+    "economic_growth": "moderate",
+    "inflation_expectation": "elevated",
+    "fed_policy": "restrictive",
+    "recommended_actions": [
+      "Maintain defensive positioning",
+      "Increase allocation to quality bonds",
+      "Consider inflation-protected securities",
+      "Review alternative investments"
+    ]
+  },
+  "risk_metrics": {
+    "var_95": -0.032,
+    "max_drawdown": -0.078,
+    "correlation_to_sp500": 0.82,
+    "beta": 0.91
+  },
+  "compliance_notes": {
+    "last_adv_update": "2024-08-15",
+    "next_review_date": "2024-11-15",
+    "outstanding_items": [],
+    "regulatory_changes": [
+      "New SEC cybersecurity disclosure rules",
+      "Updated Form ADV requirements"
+    ]
+  }
+}

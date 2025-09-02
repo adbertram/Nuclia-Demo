@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataVault Client Portal - Investment Insights Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #004080;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .portal-section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        h2 {
+            color: #004080;
+            margin-top: 0;
+        }
+        .subtitle {
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        .search-container {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            background: #fafafa;
+        }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .search-input {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #004080;
+            border-radius: 4px;
+        }
+        .search-button {
+            padding: 12px 30px;
+            background-color: #004080;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .search-button:hover {
+            background-color: #003060;
+        }
+        .search-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .results-container {
+            min-height: 200px;
+            margin-top: 20px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .result-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .result-title {
+            font-weight: bold;
+            color: #004080;
+            margin-bottom: 8px;
+        }
+        .result-text {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        .result-source {
+            color: #999;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        .stats {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>DataVault Financial Services</h1>
+        <div class="subtitle">Client Portal - Investment Insights</div>
+    </div>
+
+    <div class="container">
+        <div class="portal-section">
+            <h2>Search Our Investment Knowledge Base</h2>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="searchInput" 
+                        placeholder="Search for market insights, compliance documents, or investment analyses..."
+                        value="Federal Reserve interest rates"
+                    >
+                    <button class="search-button" id="searchButton" onclick="performSearch()">
+                        Search
+                    </button>
+                </div>
+                
+                <div id="resultsContainer" class="results-container">
+                    <div style="text-align: center; padding: 40px; color: #999;">
+                        Enter a search query to explore our investment knowledge base
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portal-section">
+            <h2>Quick Search Suggestions</h2>
+            <p>Try these searches:</p>
+            <ul>
+                <li><a href="#" onclick="quickSearch('Federal Reserve monetary policy'); return false;">Federal Reserve monetary policy</a></li>
+                <li><a href="#" onclick="quickSearch('risk disclosure requirements'); return false;">Risk disclosure requirements</a></li>
+                <li><a href="#" onclick="quickSearch('market volatility inflation'); return false;">Market volatility and inflation</a></li>
+                <li><a href="#" onclick="quickSearch('Wellington Capital portfolio'); return false;">Wellington Capital portfolio</a></li>
+                <li><a href="#" onclick="quickSearch('SEC compliance updates'); return false;">SEC compliance updates</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // DataVault's InvestmentInsights Knowledge Box configuration
+        const NUCLIA_CONFIG = {
+            apiKey: 'eyJhbGciOiJSUzI1NiIsImtpZCI6InNhIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwczovL2F3cy11cy1lYXN0LTItMS5udWNsaWEuY2xvdWQvIiwiaWF0IjoxNzU2NzI3NjU2LCJzdWIiOiJlMzhlNzEwNS1hOTI4LTRjNzEtYjYyNi1mOWQyM2MxMDIxM2MiLCJqdGkiOiJmMmYxYzM4NC0xZTlmLTQyNGYtOWI4My00MTgyNTNiYmNkYWIiLCJleHAiOjE3ODgyNjM2NTIsImtleSI6ImVkMTI3OTEyLWE4MjMtNGRjMi1iNThiLTkzNzBlY2RiNGRlOSIsImtpZCI6ImE3NjczYWY1LWVmZGUtNGIzZC1hYWY0LTZiY2ZjMGJiMTM2YiJ9.AQHsA6mTva-XqCJ-beOl29yeor-kA3XxT6ujtUMRf1w-4ZB5Mdyk51e_WafHymYKRowWE0amMx4R-O9aoDRNHweX0sQXVvdeN6gR6VPeO0xyV1DZoQpngB0Y-3G8pLdqraBDDPXQYzVmU0g_98VsOfKSzLAzYVaCTWZgZjyUO1SCm85FV-th1qGhR5DAvnSLWSa403_H7b_V7ITis-s46KbZ01eXBbCIybEIoTY2kvJM0TKGYs4YbdqHyZ-wwdZnF7CsHxOzpeQ1iPc9F9oJrQMAPNesLSnFivuOlZGkhzS3z1ze6tsvoZffqgJqSQz9US0coedT3FhwCUkb-ixShESj4nm541b9MM-6OiFq7RC20kyZTNV7h2o_vLkcjuEs3jEZJR_142Q9W6C1XC9K31IVNn7VhZB-c0-JUSDSuddhRqMSOen9fYrHTspp5B23gMHfGAv1caSrGkG_1Wv58Ba0KFMnjF3bkIFwC1mGOAWf9ewsuiA188qXNvzL4FmSvyDGKmgc32oNMeT8KKx33U_1GGMRYEhtOGQGk0cFPqAHao7SkBFknkrWbOICuGEeAjLnRq8JF48iUguLBiGOBd6MTBOVtI3x09VMf0Fm-9u6Et09KZBHY3Q4paisCtEq7IA3naeAQJaowx_h82YFVeCVuqUToQOVpQS6I6pZ0-c',
+            kbId: '45bd361a-7e42-487a-9ff9-c003e7a93560',
+            endpoint: 'https://aws-us-east-2-1.nuclia.cloud/api/v1'
+        };
+
+        function quickSearch(query) {
+            document.getElementById('searchInput').value = query;
+            performSearch();
+        }
+
+        async function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const query = searchInput.value.trim();
+
+            if (!query) {
+                alert('Please enter a search query');
+                return;
+            }
+
+            // Disable button and show loading
+            searchButton.disabled = true;
+            searchButton.textContent = 'Searching...';
+            resultsContainer.innerHTML = '<div class="loading">Searching investment knowledge base...</div>';
+
+            try {
+                const response = await fetch(`${NUCLIA_CONFIG.endpoint}/kb/${NUCLIA_CONFIG.kbId}/find`, {
+                    method: 'POST',
+                    headers: {
+                        'X-NUCLIA-SERVICEACCOUNT': `Bearer ${NUCLIA_CONFIG.apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: query
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Search failed: ${response.status}`);
+                }
+
+                const data = await response.json();
+                displayResults(data, query);
+
+            } catch (error) {
+                console.error('Search error:', error);
+                resultsContainer.innerHTML = `
+                    <div class="error">
+                        Error performing search. Please try again.
+                        <br><small>${error.message}</small>
+                    </div>
+                `;
+            } finally {
+                searchButton.disabled = false;
+                searchButton.textContent = 'Search';
+            }
+        }
+
+        function displayResults(data, query) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            let html = '';
+
+            // Count results
+            let totalResults = 0;
+            if (data.resources) totalResults += Object.keys(data.resources).length;
+            if (data.paragraphs) totalResults += Object.keys(data.paragraphs).length;
+            if (data.sentences) totalResults += Object.keys(data.sentences).length;
+
+            html += `<div class="stats">Found ${totalResults} results for "<strong>${query}</strong>"</div>`;
+
+            if (totalResults === 0) {
+                html += '<div style="padding: 20px; text-align: center; color: #666;">No results found. Try a different search term.</div>';
+            } else {
+                // Display resources
+                if (data.resources) {
+                    Object.entries(data.resources).forEach(([id, resource]) => {
+                        const title = resource.title || 'Untitled Document';
+                        let text = '';
+                        
+                        // Extract text from paragraphs
+                        if (resource.paragraphs) {
+                            const firstParagraph = Object.values(resource.paragraphs)[0];
+                            if (firstParagraph && firstParagraph.text) {
+                                text = firstParagraph.text.substring(0, 200) + '...';
+                            }
+                        }
+
+                        html += `
+                            <div class="result-item">
+                                <div class="result-title">${title}</div>
+                                ${text ? `<div class="result-text">${text}</div>` : ''}
+                                <div class="result-source">Document ID: ${id.substring(0, 8)}...</div>
+                            </div>
+                        `;
+                    });
+                }
+
+                // Display paragraphs if no resources
+                if (!data.resources && data.paragraphs) {
+                    Object.entries(data.paragraphs).slice(0, 5).forEach(([id, paragraph]) => {
+                        const text = paragraph.text || '';
+                        html += `
+                            <div class="result-item">
+                                <div class="result-text">${text.substring(0, 300)}...</div>
+                                <div class="result-source">Paragraph ID: ${id.substring(0, 8)}...</div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            resultsContainer.innerHTML = html;
+        }
+
+        // Allow Enter key to trigger search
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>

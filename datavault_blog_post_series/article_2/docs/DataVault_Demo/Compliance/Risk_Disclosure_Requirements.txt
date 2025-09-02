@@ -1,0 +1,76 @@
+RISK DISCLOSURE REQUIREMENTS - REGULATORY SUMMARY
+Updated: October 2024
+Source: SEC Form ADV Guidelines
+
+OVERVIEW
+Investment advisers must provide clear and comprehensive risk disclosures to clients as mandated by SEC regulations and Form ADV Part 2 requirements.
+
+KEY DISCLOSURE REQUIREMENTS
+
+1. MARKET RISK
+All investment strategies involve risk of loss that clients should be prepared to bear. Past performance does not guarantee future results.
+
+2. INFLATION RISK
+The purchasing power of investments may be eroded by inflation, particularly affecting fixed-income securities and cash positions.
+
+3. LIQUIDITY RISK
+Certain investments may be difficult to sell quickly at fair market value, especially during periods of market stress.
+
+4. CONCENTRATION RISK
+Portfolios concentrated in specific sectors, regions, or asset classes may experience higher volatility.
+
+5. REGULATORY RISK
+Changes in laws and regulations may materially impact investment strategies and portfolio values.
+
+SPECIFIC DISCLOSURE AREAS
+
+Economic Conditions
+- Federal Reserve monetary policy impacts
+- Global economic uncertainty effects
+- Regional economic disparities
+
+Market Volatility
+- Sudden market movements
+- Correlation risks during crisis periods
+- Systemic risk factors
+
+Operational Risks
+- Cybersecurity threats
+- Business continuity challenges
+- Third-party service provider risks
+
+COMPLIANCE REQUIREMENTS
+
+Timing of Disclosures
+- Initial disclosure at client onboarding
+- Annual updates via Form ADV
+- Material changes within 30 days
+
+Documentation Standards
+- Written acknowledgment from clients
+- Retention period: 5 years minimum
+- Electronic delivery acceptable with consent
+
+Review Process
+- Quarterly internal compliance reviews
+- Annual third-party audit recommended
+- Board oversight for material changes
+
+BEST PRACTICES
+
+1. Use plain English avoiding technical jargon
+2. Provide specific examples relevant to client portfolios
+3. Update disclosures promptly when risks change
+4. Maintain version control and audit trail
+5. Train staff on consistent risk communication
+
+REGULATORY REFERENCES
+- Investment Advisers Act of 1940
+- SEC Rule 204-3 (Brochure Rule)
+- Form ADV Part 2A Item 8
+- FINRA Rule 2111 (Suitability)
+
+For questions regarding risk disclosure requirements, consult with compliance department or legal counsel.
+
+---
+End of Document
